@@ -17,9 +17,21 @@ input = <<-EOS
 837	80	95	281	652	822	1028	1295	101	1140	88	452	85	444	649	1247
 EOS
 
+def find_evenly_divisible_values(array)
+  sorted_array = array.sort.reverse
+
+  sorted_array.each_with_index do |numerator, i|
+    sorted_array.drop(i + 1).each do |denominator|
+      return [numerator, denominator] if numerator % denominator == 0
+    end
+  end
+end
+
 result = input.split("\n").reduce(0) do |sum, row|
   row_array = row.split.map(&:to_i)
-  sum += row_array.max - row_array.min
+
+  numerator, denominator = find_evenly_divisible_values(row_array)
+  sum += numerator / denominator
 end
 
 puts result
