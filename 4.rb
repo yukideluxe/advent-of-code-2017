@@ -1,5 +1,7 @@
 def valid_passphrase(passphrase)
-  words = passphrase.split(" ")
+  words = passphrase.split(" ").map do |word|
+    word.chars.sort.join
+  end
 
   words.size == words.uniq.size
 end
