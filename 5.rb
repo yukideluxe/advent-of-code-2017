@@ -10,12 +10,27 @@ def count_steps(input)
       return steps
     end
 
-    input_array[i] += 1
+    if current_step >= 3
+      input_array[i] -= 1
+    else
+      input_array[i] += 1
+    end
+
     i = i + current_step
     current_step = input_array[i]
     steps += 1
   end
 end
+
+input = <<-IN
+0
+3
+0
+1
+-3
+IN
+
+puts count_steps(input)
 
 input = <<-IN
 2
